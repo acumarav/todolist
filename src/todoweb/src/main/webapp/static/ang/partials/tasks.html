@@ -1,0 +1,47 @@
+<h6>tasks view</h6>
+<div>{{message}}</div>
+
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Assigned to</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="task in allTasks">
+                <td>{{task.id}}</td>
+                <td>{{task.title}}</td>
+                <td>{{task.description}}</td>
+                <td>{{task.status}}</td>
+                <td>{{task.priority}}</td>
+                <td>{{task.assignee}}</td>
+                <td><div ng-click="deleteTask(task.id)">Del Me</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-repeat="task in allTasks">
+    <div>{{task.title}}</div>
+    <div>{{task.status}}</div>
+    <div>{{task.description}}</div>
+</div>
+
+        <input type="button" value="Double Title" ng-click="doubleTitle()"/>
+
+<h6>Users:</h6>
+
+<div ng-repeat="task in allUsers">
+
+    <div>{{task.id}}&nbsp;{{task.firstName}}&nbsp;{{task.lastName}}</div>
+</div>
+

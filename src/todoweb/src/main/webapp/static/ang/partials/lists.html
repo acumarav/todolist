@@ -1,0 +1,82 @@
+<h3>{{message}}</h3>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Assigned to</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="task in listTasks">
+            <td>{{task.title}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.status}}</td>
+            <td>{{task.priority}}</td>
+            <td>{{allUsers[task.assignee-1].firstName}}&nbsp;{{allUsers[task.assignee-1].firstName}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+        <form class="form-horizontal"   ng-submit="addTask()">
+            <div class="form-group" ng-hide="currentTaskList">
+                <label class="col-sm-3 control-label" for="listTitle">New list name:</label>
+                <div class="col-sm-9">
+                    <input type="text" id="listTitle" ng-model="listTitle" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group" >
+                <label class="col-sm-3 control-label" for="newtask-title">Title</label>
+                <div class="col-sm-9">
+                    <input type="text" id="newtask-title" ng-model="newTask.title" class="form-control" required/>
+                </div>
+            </div>
+
+            <div class="form-group" >
+                <label class="col-sm-3 control-label" for="newtask-description">Description</label>
+                <div class="col-sm-9">
+                    <input type="text" id="newtask-description" ng-model="newTask.description"  class="form-control" required/>
+                </div>
+            </div>
+
+
+            <div class="form-group" >
+                <label class="col-sm-3 control-label" for="newtask-priority">Priority</label>
+                <div class="col-sm-9">
+                    <select id="newtask-priority" class="form-control" ng-model="newTask.priority" required>
+                        <option ng-repeat="priority in allPriorities" value="{{priority}}" >
+                            {{priority}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" >
+                <label class="col-sm-3 control-label" for="newtask-assignee">Assignee</label>
+                <div class="col-sm-9">
+                    <select ng-model="newTask.assignee" id="newtask-assignee" class="form-control">
+                        <option ng-repeat="user in allUsers" value="{{user.id}}" >
+                            {{user.firstName}}&nbsp;{{user.lastName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" >
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" ng-click="update(newTask)" value="Save" class="btn btn-primary"/>
+                </div>
+            </div>
+
+        </form>
+
+<pre>newTask = {{newTask | json}}</pre>
