@@ -44,7 +44,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
         Task firstTask = new Task();
         firstTask.setTitle("01. XSS spring");
-        firstTask.setStatus(Status.New);
+        firstTask.setStatus(Status.Complete);
         firstTask.setPriority(Priority.Urgent);
         firstTask.setDescription("Support spring default xss protection in client authentication");
         firstTask.setAssignee(users.get(0));

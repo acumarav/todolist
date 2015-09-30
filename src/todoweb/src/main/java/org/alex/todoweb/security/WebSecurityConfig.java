@@ -12,6 +12,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -46,10 +49,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and().authorizeRequests().antMatchers(HttpMethod.PUT,"/rs/task").authenticated()
         .and().authorizeRequests().anyRequest().permitAll()
         .and().formLogin()
-        .and().httpBasic();
+        .and().httpBasic()
+        .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
 
 
-        http.csrf().disable();
+        http.csrf().csrfTokenRepository(csrfTokenRepository());
+        //http.csrf().disable();
+    }
+
+    private CsrfTokenRepository csrfTokenRepository() {
+        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+        repository.setHeaderName("X-XSRF-TOKEN");
+        return repository;
     }
 
     private List<User> createUsers() {
