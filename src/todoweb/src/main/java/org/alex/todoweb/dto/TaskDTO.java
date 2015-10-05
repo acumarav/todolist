@@ -14,10 +14,14 @@ public class TaskDTO {
     public static TaskDTO create(Task task){
         TaskDTO dto=new TaskDTO();
 
-       /* dto.setTitle();
-        dto.setDescription();
-        dto.setStatus();
-        dto.setPriority();*/
+        dto.setPriority(task.getPriority().name());
+        dto.setDescription(task.getDescription());
+        dto.setId(task.getId());
+        dto.setTitle(task.getTitle());
+        dto.setVersion(task.getVersion());
+        dto.setStatus(task.getStatus().name());
+        dto.setAssignee(task.getAssignee()!=null?task.getAssignee().getId():null);
+        dto.setTaskListId(task.getTaskList().getId());
 
         return dto;
     }
@@ -39,7 +43,10 @@ public class TaskDTO {
     private Integer assignee;
 
     private Integer taskListId;
+
     private String status;
+
+    private Integer version;
 
 
     public Integer getId() {
@@ -101,5 +108,12 @@ public class TaskDTO {
 
     public String getStatus() {
         return status;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

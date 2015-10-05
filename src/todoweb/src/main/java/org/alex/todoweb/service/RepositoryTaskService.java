@@ -31,7 +31,7 @@ public class RepositoryTaskService implements TaskService {
     @Override
     public Task add(TaskDTO dto) {
 
-        Task task=new Task();
+        Task task = new Task();
 
         User assignee = userRepository.findOne(dto.getAssignee());
         TaskList taskList = listRepository.findOne(dto.getTaskListId());
@@ -66,7 +66,6 @@ public class RepositoryTaskService implements TaskService {
     }
 
 
-
     @Transactional(readOnly = true)
     @Override
     public List<Task> findAll() {
@@ -93,20 +92,24 @@ public class RepositoryTaskService implements TaskService {
 
     @Transactional(rollbackFor = NotFoundException.class)
     @Override
-    public Task update(TaskDTO updated) throws NotFoundException {
+    public Task update(TaskDTO updated) throws ConcurrencyException {
         LOGGER.debug("Updating task with information: {}", updated);
 
         Task found = repository.findOne(updated.getId());
 
-        //Update the task information
-        //found.setTitle(updated.getTitle());
-        //found.setDescription(updated.getDescription());
-        Status status=Status.valueOf(updated.getStatus());
-        found.setStatus(status);
-        found.setPriority(Priority.parse(updated.getPriority()));
 
-        Task saved = repository.save(found);
+        if (updated.getVersion().equals(found.getVersion())) {
 
-        return saved;
+            Status status = Status.valueOf(updated.getStatus());
+            found.setStatus(status);
+            found.setPriority(Priority.parse(updated.getPriority()));
+
+            Task saved = repository.save(found);
+
+            return saved;
+        }
+        else{
+            throw new ConcurrencyException("Data Has been updated");
+        }
     }
 }

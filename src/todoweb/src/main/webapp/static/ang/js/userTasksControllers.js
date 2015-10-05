@@ -63,9 +63,9 @@ userTasksControllers.controller(
                 taskToUpdate.status=task.status;
                 taskToUpdate.priority=task.priority;
                 taskToUpdate.id=task.id;
+                taskToUpdate.version=task.version;
 
                 console.log(JSON.stringify(taskToUpdate));
-
 
                 Task.update(taskToUpdate, function success(response) {
                         console.log('updateOk');

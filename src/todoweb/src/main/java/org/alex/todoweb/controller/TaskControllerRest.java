@@ -7,6 +7,7 @@ import org.alex.todoweb.model.*;
 import org.alex.todoweb.repository.TaskListRepository;
 import org.alex.todoweb.repository.TaskRepository;
 import org.alex.todoweb.repository.UserRepository;
+import org.alex.todoweb.service.ConcurrencyException;
 import org.alex.todoweb.service.NotFoundException;
 import org.alex.todoweb.service.TaskService;
 import org.slf4j.Logger;
@@ -32,14 +33,15 @@ public class TaskControllerRest {
 
 
     @RequestMapping("/tasks")
-    public Task[] getAllTask(){
+    public TaskDTO[] getAllTask(){
 
         LOGGER.info("REST call: getAllTasks");
 
         List<Task> allTasks = repository.findAll();
 
         LOGGER.info("Total tasks found: "+allTasks.size());
-        return allTasks.toArray(new Task[allTasks.size()]);
+        TaskDTO[] dtos = allTasks.stream().map(x -> TaskDTO.create(x)).toArray(size -> new TaskDTO[size]);
+        return dtos;
     }
 
    @RequestMapping(value = "/task/{id}",method = RequestMethod.GET)
@@ -64,12 +66,11 @@ public class TaskControllerRest {
     }
 
     @RequestMapping(value = "/task", method = RequestMethod.PUT)
-    public Task[] updateTask(@RequestBody TaskDTO taskDTO) throws NotFoundException {
+    public Task[] updateTask(@RequestBody TaskDTO taskDTO) throws ConcurrencyException {
 
         LOGGER.info("REST call: update Task: " + taskDTO);
 
         Task updated = taskService.update(taskDTO);
-
 
         return new Task[]{updated};
     }

@@ -21,5 +21,5 @@ public interface TaskService {
     public Task findById(Integer id) throws NotFoundException;
 
 
-    public Task update(TaskDTO updated) throws NotFoundException;
+    public Task update(TaskDTO updated) throws ConcurrencyException;
 }
