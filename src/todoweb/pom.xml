@@ -215,7 +215,52 @@
                     <keystorePass>secret</keystorePass>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+    <profiles>
+        <!--<profile>
+            <id>inmemH2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                &lt;!&ndash;Database Configuration&ndash;&gt;
+                <db.driver>org.h2.Driver</db.driver>
+                <db.url>jdbc:h2:mem:datajpa</db.url>
+                <db.username>sa</db.username>
+                <db.password></db.password>
+                &lt;!&ndash;#Hibernate Configuration&ndash;&gt;
+                <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+                <hibernate.format_sql>true</hibernate.format_sql>
+                <hibernate.hbm2ddl>/hibernate.hbm2ddl>.auto=create-drop</hibernate.hbm2ddl>
+                <hibernate.ejb>/hibernate.ejb>.naming_strategy=org.hibernate.cfg.ImprovedNamingStrategy</hibernate.ejb>
+                <hibernate.show_sql>true</hibernate.show_sql>
+            </properties>
+        </profile>
+
+        <profile >
+            <id>localpg</id>
+            <properties>
+                &lt;!&ndash;#Database Configuration&ndash;&gt;
+                <db.driver>org.postgresql.Driver</db.driver>
+                <db.url>jdbc:postgresql://localhost:5439/tododb</db.url>
+                <db.username>todouser</db.username>
+                <db.password></db.password>
+                &lt;!&ndash;#Hibernate Configuration&ndash;&gt;
+                <hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
+                <hibernate.format_sql>true</hibernate.format_sql>
+                <hibernate.hbm2ddl>/hibernate.hbm2ddl>.auto=create-drop</hibernate.hbm2ddl>
+                <hibernate.ejb>/hibernate.ejb>.naming_strategy=org.hibernate.cfg.ImprovedNamingStrategy</hibernate.ejb>
+                <hibernate.show_sql>true</hibernate.show_sql>
+            </properties>
+        </profile>-->
+    </profiles>
 </project>

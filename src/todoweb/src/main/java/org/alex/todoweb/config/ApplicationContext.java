@@ -33,7 +33,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableWebMvc
 @EnableJpaRepositories("org.alex.todoweb.repository")
-@PropertySource("classpath:application.properties")
+@PropertySource({"classpath:application.properties"})
 public class ApplicationContext extends WebMvcConfigurerAdapter {
     
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/jsp/";
