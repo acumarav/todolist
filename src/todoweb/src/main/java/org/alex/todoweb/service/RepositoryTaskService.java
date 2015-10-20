@@ -60,6 +60,8 @@ public class RepositoryTaskService implements TaskService {
 
         repository.delete(deleted.getId());
 
+        repository.flush();
+
         LOGGER.debug("Deleted task: {}", deleted);
 
         return deleted;
@@ -104,7 +106,7 @@ public class RepositoryTaskService implements TaskService {
             found.setStatus(status);
             found.setPriority(Priority.parse(updated.getPriority()));
 
-            Task saved = repository.save(found);
+            Task saved = repository.saveAndFlush(found);
 
             return saved;
         }
