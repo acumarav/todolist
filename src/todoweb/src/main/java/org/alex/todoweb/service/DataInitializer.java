@@ -2,6 +2,7 @@ package org.alex.todoweb.service;
 
 import org.alex.todoweb.model.*;
 import org.alex.todoweb.repository.TaskListRepository;
+import org.alex.todoweb.repository.TaskRepository;
 import org.alex.todoweb.repository.UserRepository;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
@@ -26,13 +27,20 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     @Resource
     TaskListRepository taskListRepository;
 
+    @Resource
+    TaskRepository taskRepository;
+
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
         List<User> users = userRepository.findAll();
 
-        createTasks(users);
+        List<Task> allTasks = taskRepository.findAll();
+        if(allTasks.isEmpty()) {
+            //Create tasks only at first run
+            createTasks(users);
+        }
 
         LOGGER.info("App Event: " + ToStringBuilder.reflectionToString(event));
     }

@@ -46,7 +46,7 @@ public class RepositoryTaskService implements TaskService {
         task.setAssignee(assignee);
         task.setTaskList(taskList);
 
-        Task saved = repository.save(task);
+        Task saved = repository.saveAndFlush(task);
 
         return saved;
     }
