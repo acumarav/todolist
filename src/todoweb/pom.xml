@@ -186,9 +186,14 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1204-jdbc42</version>
+        </dependency>
     </dependencies>
     <build>
-        <finalName>uiSample</finalName>
+        <finalName>todolist</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -226,6 +231,51 @@
         </plugins>
     </build>
     <profiles>
+            <profile>
+                <id>local-pg</id>
+                <build>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-antrun-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <phase>test</phase>
+                                    <goals>
+                                        <goal>run</goal>
+                                    </goals>
+                                    <configuration>
+                                        <tasks>
+                                            <delete file="${project.build.outputDirectory}/db.properties"/>
+                                            <copy file="src/main/resources/db.localpg.properties"
+                                                  tofile="${project.build.outputDirectory}/db.properties"/>
+                                        </tasks>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <configuration>
+                                <skip>true</skip>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-jar-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>jar</goal>
+                                    </goals>
+                                    <configuration>
+                                        <classifier>test</classifier>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </build>
+            </profile>
         <!--<profile>
             <id>inmemH2</id>
             <activation>

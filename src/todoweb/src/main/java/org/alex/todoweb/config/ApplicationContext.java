@@ -33,7 +33,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableWebMvc
 @EnableJpaRepositories("org.alex.todoweb.repository")
-@PropertySource({"classpath:application.properties"})
+@PropertySource({"classpath:application.properties","classpath:db.properties"})
 public class ApplicationContext extends WebMvcConfigurerAdapter {
     
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/jsp/";
@@ -84,7 +84,8 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
     public DataSource dataSource() {
         BoneCPDataSource dataSource = new BoneCPDataSource();
 
-        dataSource.setDriverClass(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+        String requiredProperty = environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER);
+        dataSource.setDriverClass(requiredProperty);
         dataSource.setJdbcUrl(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
         dataSource.setUsername(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
         dataSource.setPassword(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
