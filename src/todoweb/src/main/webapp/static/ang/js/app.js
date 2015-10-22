@@ -21,26 +21,26 @@ var tasksApp=angular.module('tasksApp',[
 tasksApp.config([ '$routeProvider','$locationProvider',
 function($routeProvider, $locationProvider){
     $routeProvider.when('/',{
-        templateUrl:'/static/ang/partials/main.html',
+        templateUrl:'static/ang/partials/main.html',
         controller:'MainCtrl'
     })
         .when('/tasks',{
-            templateUrl:'/static/ang/partials/tasks.html',
+            templateUrl:'static/ang/partials/tasks.html',
             controller:'AllTasksCtrl'
         })
         .when('/lists',{
-            templateUrl:'/static/ang/partials/lists.html',
+            templateUrl:'static/ang/partials/lists.html',
             controller:'NewListCtrl'
         })
         .when('/usertasks',{
-            templateUrl:'/static/ang/partials/usertasks.html',
+            templateUrl:'static/ang/partials/usertasks.html',
             controller:'UserTasksCtrl'
         })
         .when('/login', {
-            templateUrl: '/static/ang/partials/login.html',
+            templateUrl: 'static/ang/partials/login.html',
             controller: 'LoginCtrl'
         }).when('/logOut', {
-            templateUrl: '/static/ang/partials/login.html',
+            templateUrl: 'static/ang/partials/login.html',
             controller: 'LogoutCtrl'
         });
 

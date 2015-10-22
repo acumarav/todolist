@@ -1,0 +1,22 @@
+<h3>{{message}}</h3>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="list in allLists" ng-click="showUserTasks()">
+            <td>{{list.id}}</td>
+            <td>{{list.title}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<input type="button" ng-click="newList()" value="Add Tasklist"/>
+<input type="button" ng-click="showUserTasks()" value="Go To Tasks"/>

@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <title>todo list app</title>
 
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap-theme.css"/>
 
-    <script type="text/javascript" src="/static/js/libs/jquery-1.11.3.js"></script>
-    <script type="text/javascript" src="/static/js/libs/bootstrap.js"></script>
-    <script src="/static/js/libs/angular.js"></script>
-    <script src="/static/js/libs/angular-route.js"></script>
-    <script src="/static/js/libs/angular-resource.js"></script>
-    <script src="/static/js/libs/angular-cookies.js"></script>
+    <script type="text/javascript" src="static/js/libs/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="static/js/libs/bootstrap.js"></script>
+    <script src="static/js/libs/angular.js"></script>
+    <script src="static/js/libs/angular-route.js"></script>
+    <script src="static/js/libs/angular-resource.js"></script>
+    <script src="static/js/libs/angular-cookies.js"></script>
 
-    <script src="/static/ang/js/app.js"></script>
-    <script src="/static/ang/js/controllers.js"></script>
-    <script src="/static/ang/js/listControllers.js"></script>
-    <script src="/static/ang/js/userTasksControllers.js"></script>
-    <script src="/static/ang/js/services.js"></script>
-    <script src="/static/ang/js/businessServices.js"></script>
+    <script src="static/ang/js/app.js"></script>
+    <script src="static/ang/js/controllers.js"></script>
+    <script src="static/ang/js/listControllers.js"></script>
+    <script src="static/ang/js/userTasksControllers.js"></script>
+    <script src="static/ang/js/services.js"></script>
+    <script src="static/ang/js/businessServices.js"></script>
 
 </head>
 <body>
@@ -40,7 +40,7 @@
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/"><spring:message code="header.home.link.label"/></a></li>
+                <li class="active"><a href=""><spring:message code="header.home.link.label"/></a></li>
                 <li><a href="https://cz.linkedin.com/pub/alex-tsumarau/10/b10/93a" target="_blank">Profile</a></li>
                 <li><a id="lo" href="#!logOut">Logout</a></li>
             </ul>

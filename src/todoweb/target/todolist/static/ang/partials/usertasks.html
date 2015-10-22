@@ -1,0 +1,29 @@
+<h3>{{message}}</h3>
+
+<div ng-repeat="list in allLists">
+    <div><strong>{{list.title}}</strong></div>
+    <div class="row" ng-repeat="task in allTasks | filter:{taskListId:list.id}">
+        <div class="col-sm-1">{{task.title}}</div>
+        <div class="col-sm-5">{{task.description}}</div>
+        <div class="col-sm-2">
+            <select ng-model="task.status" ng-change="updateTask(task)" ng-hide="userId != task.assignee" ng-options="status as status for status in allStatuses"  class="btn btn-mini"/>
+            <div ng-hide="userId == task.assignee">{{task.status}}</div>
+        </div>
+        <div class="col-sm-2">
+            <select ng-model="task.priority" ng-change="updateTask(task)" ng-hide="userId != task.assignee" ng-options="priority as priority for priority in allPriorities"  class="btn btn-mini"/>
+            <div ng-hide="userId == task.assignee">{{task.priority}}</div>
+        </div>
+        <div class="col-sm-1">
+            <div ng-init="usr=(allUsers | filter:{id:task.assignee})[0]">{{usr.firstName}}&nbsp;{{usr.lastName}}
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <a ng-hide="userId != task.assignee"  ng-click="deleteTask(task.id)">Delete</a>
+        </div>
+    </div>
+    <hr/>
+</div>
+
+<pre>allLists = {{allLists | json}}</pre>
+
+<pre>allTasks = {{allTasks | json}}</pre>
