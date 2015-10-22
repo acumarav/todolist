@@ -1,7 +1,7 @@
 package org.alex.todoweb.config;
 
-import com.jolbox.bonecp.BoneCPDataSource;
-import org.hibernate.ejb.HibernatePersistence;
+
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -17,7 +17,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories("org.alex.todoweb.repository")
-@PropertySource("classpath:application.properties")
+@PropertySource({"classpath:application.properties", "classpath:db.properties"})
 public class PersistenceTestContext {
 
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
@@ -41,9 +41,10 @@ public class PersistenceTestContext {
      */
     @Bean
     public DataSource dataSource() {
-        BoneCPDataSource dataSource = new BoneCPDataSource();
+        HikariDataSource dataSource = new HikariDataSource();
 
-        dataSource.setDriverClass(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+        dataSource.setDriverClassName(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+
         dataSource.setJdbcUrl(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
         dataSource.setUsername(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
         dataSource.setPassword(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));

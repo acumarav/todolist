@@ -4,7 +4,6 @@ package org.alex.todoweb.security;
 import com.google.common.collect.ImmutableMap;
 import org.alex.todoweb.model.User;
 import org.alex.todoweb.repository.UserRepository;
-import org.alex.todoweb.service.DataInitializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

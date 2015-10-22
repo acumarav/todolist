@@ -1,8 +1,11 @@
 package org.alex.todoweb.config;
 
-import com.jolbox.bonecp.BoneCPDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -33,9 +36,9 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableWebMvc
 @EnableJpaRepositories("org.alex.todoweb.repository")
-@PropertySource({"classpath:application.properties","classpath:db.properties"})
+@PropertySource({"classpath:application.properties", "classpath:db.properties"})
 public class ApplicationContext extends WebMvcConfigurerAdapter {
-    
+
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/jsp/";
     private static final String VIEW_RESOLVER_SUFFIX = ".jsp";
 
@@ -59,6 +62,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 
     /**
      * Configures the location of static resources such as css files.
+     *
      * @param registry
      */
     @Override
@@ -69,6 +73,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
     /**
      * Ensures that dispatcher servlet can be mapped to '/' and static resources
      * are still served by the containers default servlet.
+     *
      * @param configurer
      */
     @Override
@@ -78,14 +83,15 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 
     /**
      * Configures the data source.
+     *
      * @return
      */
     @Bean
     public DataSource dataSource() {
-        BoneCPDataSource dataSource = new BoneCPDataSource();
+        HikariDataSource dataSource = new HikariDataSource();
 
-        String requiredProperty = environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER);
-        dataSource.setDriverClass(requiredProperty);
+        final String databaseDriver = environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER);
+        dataSource.setDriverClassName(databaseDriver);
         dataSource.setJdbcUrl(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
         dataSource.setUsername(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
         dataSource.setPassword(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
@@ -95,6 +101,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 
     /**
      * Configures the transaction manager.
+     *
      * @return
      */
     @Bean
@@ -108,6 +115,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 
     /**
      * Configures the entity manager factory.
+     *
      * @return
      */
     @Bean
@@ -132,6 +140,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 
     /**
      * Configures the exception resolver.
+     *
      * @return
      */
     @Bean
@@ -158,6 +167,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 
     /**
      * Configures the message source bean.
+     *
      * @return
      */
     @Bean
@@ -172,6 +182,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 
     /**
      * Configures the view resolver.
+     *
      * @return
      */
     @Bean
