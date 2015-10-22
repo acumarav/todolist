@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,8 +41,13 @@ public class TaskControllerRest {
         List<Task> allTasks = repository.findAll();
 
         LOGGER.info("Total tasks found: "+allTasks.size());
-        TaskDTO[] dtos = allTasks.stream().map(x -> TaskDTO.create(x)).toArray(size -> new TaskDTO[size]);
-        return dtos;
+        List<TaskDTO> dtos=new ArrayList<>(allTasks.size());
+        for(Task task:allTasks){
+            TaskDTO dto=TaskDTO.create(task);
+            dtos.add(dto);
+        }
+        //TaskDTO[] dtos = allTasks.stream().map(x -> TaskDTO.create(x)).toArray(size -> new TaskDTO[size]);
+        return dtos.toArray(new TaskDTO[dtos.size()]);
     }
 
    @RequestMapping(value = "/task/{id}",method = RequestMethod.GET)
