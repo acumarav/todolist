@@ -28,7 +28,7 @@ public class TaskList {
 
     @JsonIgnore
     @OneToMany(targetEntity = Task.class, mappedBy = "taskList", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Task> tasks=new LinkedHashSet<>();
+    private Set<Task> tasks=new LinkedHashSet<Task>();
 
     public Set<Task> getTasks() {
         return tasks;

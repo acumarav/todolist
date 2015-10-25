@@ -41,7 +41,7 @@ public class TaskControllerRest {
         List<Task> allTasks = repository.findAll();
 
         LOGGER.info("Total tasks found: "+allTasks.size());
-        List<TaskDTO> dtos=new ArrayList<>(allTasks.size());
+        List<TaskDTO> dtos=new ArrayList<TaskDTO>(allTasks.size());
         for(Task task:allTasks){
             TaskDTO dto=TaskDTO.create(task);
             dtos.add(dto);
