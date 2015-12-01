@@ -15,7 +15,7 @@ public class HomeController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/todo", method = RequestMethod.GET)
     public String showHomePage(Model model) {
         LOGGER.debug("Rendering home page");
 

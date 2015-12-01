@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private List<User> createUsers() {
-        List<User> users = new ArrayList<>();
+        List<User> users = new ArrayList<User>();
 
         for (String userName : USERS.keySet()) {
             String lastName = USERS.get(userName);

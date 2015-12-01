@@ -24,7 +24,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany(targetEntity = Task.class, mappedBy = "assignee")
-    private Set<Task> assignedTasks = new HashSet<>();
+    private Set<Task> assignedTasks = new HashSet<Task>();
 
     public Set<Task> getAssignedTasks() {
         return assignedTasks;

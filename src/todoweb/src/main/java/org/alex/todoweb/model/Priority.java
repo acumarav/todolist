@@ -19,7 +19,7 @@ public enum  Priority {
     }
 
     static {
-        List<String> names=new ArrayList<>();
+        List<String> names=new ArrayList<String>();
         for(Priority member: values()){
             names.add(member.name());
         }

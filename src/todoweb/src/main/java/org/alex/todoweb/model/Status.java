@@ -16,7 +16,7 @@ public enum Status {
     }
 
     static {
-        List<String> names=new ArrayList<>();
+        List<String> names=new ArrayList<String>();
         for(Status member: values()){
             names.add(member.name());
         }
