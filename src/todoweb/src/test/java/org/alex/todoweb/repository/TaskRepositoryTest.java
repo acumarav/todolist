@@ -51,6 +51,7 @@ public class TaskRepositoryTest {
 
         taskListRepository.save(list);
         userRepository.save(user2);
+        userRepository.save(user);
         taskRepository.save(task);
         taskRepository.flush();
 
